@@ -1,0 +1,16 @@
+{
+    "kafka_brokers": ["86.106.181.219:29092"],
+    "kafka_topic": "telegraf",
+    "initiator_addr": "10.111.114.2",
+    "ka_interval": 20,
+    "vendor": "IPDR Python Client",
+    "cmts": [
+        {
+            "port": 4737,
+            "addr": "10.111.111.2",
+            "passive_mode": false,
+            "sessions": ["DOCSIS-CMTS-CM-REG-STATUS-TYPE"]
+        }
+
+    ]
+}

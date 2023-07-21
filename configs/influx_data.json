@@ -1,0 +1,14 @@
+{
+    "CMTS-CM-US-STATS-TYPE": {
+        "tags": ["CmtsHostName","CmtsMdIfName","CmtsMdIfIndex","CmMacAddr","CmRegStatusId","CmtsCmUsChIfName","CmtsCmUsChIfIndex"],
+        "fields": ["CmtsSysUpTime","CmtsCmUsRxPower","CmtsCmUsSignalNoise","CmtsCmUsMicroreflections","CmtsCmUsUnerroreds","CmtsCmUsCorrecteds","CmtsCmUsUncorrectables","CmtsCmUsHighResolutionTimingOffset","CmtsCmUsIsMuted","CmtsCmUsRangingStatus"]
+    },
+    "CMTS-CM-REG-STATUS-TYPE": {
+        "tags": ["CmtsHostName","CmtsMdIfName","CmtsMdIfIndex","CmMacAddr","CmIpv4Addr"],
+        "fields": ["CmtsSysUpTime","CmQosVersion","CmRegStatusValue","CmLastRegTime"]
+    },
+    "SAMIS-TYPE-2": {
+        "tags": ["CmtsHostName","CmtsMdIfName","CmtsMdIfIndex","CmMacAddr","ServiceIdentifier","ServiceClassName","ServiceAppId","ServiceGateId","ServiceDirection"],
+        "fields": ["RecCreationTime","ServiceOctetsPassed","ServicePktsPassed","ServiceSlaDropPkts","ServiceSlaDelayPkts","ServiceTimeCreated","ServiceTimeActive"]
+    }
+}

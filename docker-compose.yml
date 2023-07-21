@@ -1,0 +1,84 @@
+version: '3.6'
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 22181:2181
+ 
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    ports:
+      - 29092:29092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENERS: INTERNAL://0.0.0.0:9092,OUTSIDE://0.0.0.0:29092
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,OUTSIDE://86.106.181.219:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,OUTSIDE:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+
+
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      TOPIC_AUTO_CREATE: "true"
+
+  telegraf:
+    image: telegraf
+    container_name: telegraf
+    restart: always
+    volumes:
+    - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    depends_on:
+      - influxdb
+    links:
+      - influxdb
+    ports:
+    - '8125:8125'
+
+  influxdb:
+    image: influxdb:1.8-alpine
+    container_name: influxdb
+    restart: always
+    environment:
+      - INFLUXDB_DB=influx
+      - INFLUXDB_ADMIN_USER=admin
+      - INFLUXDB_ADMIN_PASSWORD=admin
+    ports:
+      - '8086:8086'
+    volumes:
+      - influxdb_data:/var/lib/influxdb
+  grafana:
+    image: grafana/grafana
+    container_name: grafana-server
+    restart: always
+    depends_on:
+      - influxdb
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_INSTALL_PLUGINS=
+    links:
+      - influxdb
+    ports:
+      - '3000:3000'
+    volumes:
+      - grafana_data:/var/lib/grafana
+
+  ipdr-collector-python:
+    image: bayoyoba/ipdr-collector-python:latest
+    container_name: ipdr-collector-python
+    restart: always
+    volumes:
+    - ./configs:/configs:ro
+    depends_on:
+      - influxdb
+    links:
+      - influxdb
+      
+volumes:
+  grafana_data: {}
+  influxdb_data: {}
