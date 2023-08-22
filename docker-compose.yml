@@ -18,7 +18,7 @@ services:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_LISTENERS: INTERNAL://0.0.0.0:9092,OUTSIDE://0.0.0.0:29092
-      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,OUTSIDE://86.106.181.219:29092
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,OUTSIDE://10.0.0.247:29092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,OUTSIDE:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
 
@@ -38,6 +38,8 @@ services:
       - influxdb
     ports:
     - '8125:8125'
+    depends_on:
+      -kafka
 
   influxdb:
     image: influxdb:1.8-alpine
@@ -51,6 +53,7 @@ services:
       - '8086:8086'
     volumes:
       - influxdb_data:/var/lib/influxdb
+
   grafana:
     image: grafana/grafana
     container_name: grafana-server
@@ -68,6 +71,24 @@ services:
     volumes:
       - grafana_data:/var/lib/grafana
 
+  mongodb:
+    image: mongo:6-jammy
+    ports:
+      - '27017:27017'
+    volumes:
+      - dbdata6:/data/db
+  
+  timescaledb:
+    image: timescale/timescaledb:latest-pg14
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: timescaledb
+      POSTGRES_PASSWORD: password
+    volumes:
+      - timescaledb_data:/var/lib/postgresql/data
+
   ipdr-collector-python:
     image: bayoyoba/ipdr-collector-python:latest
     container_name: ipdr-collector-python
@@ -76,9 +97,13 @@ services:
     - ./configs:/configs:ro
     depends_on:
       - influxdb
+      - kafka
+      - mongodb
     links:
       - influxdb
-      
+
 volumes:
   grafana_data: {}
   influxdb_data: {}
+  dbdata6: {}
+  timescaledb_data: {}
