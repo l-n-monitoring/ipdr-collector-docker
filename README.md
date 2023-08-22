@@ -6,7 +6,7 @@ Verified vendors are:<br>
 ***Casa Systems, Arris and Cisco***
 
 1. How it works:
-   **it doesn't work out of the box (unfortunately you'll need to creat timescaledb user and db)**
+   **it doesn't work out of the box. There is a script "change_ip.sh" that will replace your server IP in all places needed**
    - Client connect to the CMTS and try to collect data that is defined in the configs/ipdr.json
    - ipdr collector will also send data to mongodb where you can see the data defined in configs/mongo_data.json
    - ipdr collector sends data to kafka broker
@@ -16,6 +16,11 @@ Verified vendors are:<br>
    - telegraf.conf also contains an example of snmp collection for other measurements that are not available by the IPDR
    - **scheme**<br>
 ![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](/assets/images/ipdr-docker-scheme.png)    
+
+2. Adding CMTS:
+   - edit configs/ipdr.json file and add cmtses under CMTS section.
+   - edit telegraf.conf and add new cmts
+   - restart ipdr-collector-docker and telegraf dockers
 
 2. CMTS Configuration:<br>
 **Make sure you delete all previous ipdr config on the CMTS**
