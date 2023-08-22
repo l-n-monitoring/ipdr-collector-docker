@@ -24,3 +24,48 @@ ipdr session 3 service-type us-status
 ipdr session 1 interval 1200
 ipdr master **YOUR_SERVER_IP**
 ```
+   - Cisco CMTS
+```
+ipdr session 2 DOCSIS-SAMIS-TYPE-2 DOCSIS-SAMIS-TYPE-2
+ipdr session 3 DOCSIS-CMTS-CM-US-STATS-TYPE DOCSIS-CMTS-CM-US-STATS-TYPE
+ipdr session 11 DOCSIS-CPE-TYPE-ADHOC DOCSIS-CPE-TYPE-ADHOC
+ipdr session 12 DOCSIS-CPE-TYPE-EVENT DOCSIS-CPE-TYPE-EVENT
+ipdr session 18 DOCSIS-CMTS-CM-REG-STATUS-TYPE-EVENT DOCSIS-CMTS-CM-REG-STATUS-TYPE-EVENT
+ipdr session 19 DOCSIS-CMTS-CM-REG-STATUS-TYPE-ADHOC DOCSIS-CMTS-CM-REG-STATUS-TYPE-ADHOC
+ipdr type 2 time-interval 15
+ipdr type 3 time-interval 15
+ipdr type 11 ad-hoc
+ipdr type 12 event
+ipdr type 18 event
+ipdr type 19 ad-hoc
+ipdr collector federal **YOUR_SERVER_IP**
+ipdr associate 2 federal 5
+ipdr associate 3 federal 5
+ipdr associate 11 federal 5
+ipdr associate 12 federal 5
+ipdr associate 18 federal 5
+ipdr associate 19 federal 5
+ipdr template 2 SAMIS-TYPE2
+ipdr template 3 CM-US
+ipdr template 11 CPE-TYPE
+ipdr template 12 CPE-TYPE
+ipdr template 18 CM-STATUS
+ipdr template 19 CM-STATUS
+ipdr exporter start
+cable metering ipdr-d3 session 2 type 2
+```
+   - Arris CMTS
+```
+cable metering mode docsis30
+cable metering keep-alive-interval 600
+cable metering collector  2 **YOUR_SERVER_IP**
+cable metering session 2 service samis-1 method time report-cycle-set 2
+cable metering session 4 service cpe method adhoc
+cable metering session 5 service cpe method event report-cycle-set 2 evt-pace-gap 1
+cable metering session 6 service cm-reg method event report-cycle-set 2 evt-pace-gap 1
+cable metering session 7 service cm-reg method adhoc
+cable metering session 8 service cm-us method time report-cycle-set 2
+cable metering report-cycle set 1 start 15:42 interval 30
+cable metering report-cycle set 2 start 22:00 interval 15
+cable metering shutdown no
+```
