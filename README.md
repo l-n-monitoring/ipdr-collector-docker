@@ -15,4 +15,12 @@ Verified vendors are:<br>
    - telegraf.conf also contains an example of snmp collection for other measurements that are not available by the IPDR
    - **scheme**<br>
 ![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](/assets/images/ipdr-docker-scheme.png)    
-     
+
+2. CMTS Configuration:
+   **Make sure you delete all previous ipdr config on the CMTS
+   - Casa CMTS
+   ```
+ipdr session 3 service-type us-status
+ipdr session 1 interval 1200
+ipdr master **YOUR_SERVER_IP**
+   ```
