@@ -13,5 +13,6 @@ Verified vendors are:<br>
    - telegraf will export the data to the outputs defined in telegraf.conf (influxdb and/or timescaledb by default)
    - it comes with grafana so, you can make your own dashboards
    - telegraf.conf also contains an example of snmp collection for other measurements that are not available by the IPDR
-    
+   - ***scheme**<br>
+![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](https://myoctocat.com/assets/images/base-octocat.svg)    
      
