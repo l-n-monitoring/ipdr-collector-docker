@@ -1,5 +1,5 @@
 {
-    "kafka_brokers": ["kafka:29092"],
+    "kafka_brokers": ["THIS_SERVER_IP:29092"],
     "kafka_topic": "telegraf",
     "initiator_addr": "THIS_SERVER_IP",
     "ka_interval": 600,
