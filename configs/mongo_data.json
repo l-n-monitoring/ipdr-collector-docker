@@ -1,0 +1,10 @@
+{
+    "CPE-TYPE": {
+        "_id": "CpeMacAddr",
+        "fields": ["CmtsHostName","CmtsMdIfName","CmtsSysUpTime","CmMacAddr","CpeIpv4Addr","CpeIpv6Addr","CpeIpv4AddrList"]
+    },
+    "CMTS-CM-REG-STATUS-TYPE": {
+        "_id": "CmMacAddr",
+        "fields": ["CmtsHostName","CmtsMdIfName","CmtsSysUpTime","CmIpv4Addr","CmQosVersion","CmRegStatusValue","CmLastRegTime"]
+    }
+}

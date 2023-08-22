@@ -1,16 +1,32 @@
 {
-    "kafka_brokers": ["86.106.181.219:29092"],
+    "kafka_brokers": ["kafka:29092"],
     "kafka_topic": "telegraf",
-    "initiator_addr": "10.111.114.2",
-    "ka_interval": 20,
+    "initiator_addr": "THIS_SERVER_IP",
+    "ka_interval": 600,
+    "mongodb_server": "127.0.0.1:27017",
+    "mongodb_db": "ipdr",
     "vendor": "IPDR Python Client",
     "cmts": [
         {
             "port": 4737,
-            "addr": "10.111.111.2",
+            "addr": "CISCO_CMTS_IP",
             "passive_mode": false,
-            "sessions": ["DOCSIS-CMTS-CM-REG-STATUS-TYPE"]
+            "vendor": "Cisco",
+            "sessions": ["DOCSIS-CMTS-CM-REG-STATUS-TYPE-ADHOC","DOCSIS-CMTS-CM-REG-STATUS-TYPE-EVENT","DOCSIS-CPE-TYPE-ADHOC","DOCSIS-CPE-TYPE-EVENT","DOCSIS-CMTS-CM-US-STATS-TYPE","DOCSIS-SAMIS-TYPE-2"]
+        },         
+        {
+            "port": 4737,
+            "addr": "CASA_CMTS_IP",
+            "passive_mode": false,
+            "vendor": "Casa-Systems",
+            "sessions": ["DOCSIS-CMTS-CM-REG-STATUS-TYPE-ADHOC","DOCSIS-CMTS-CM-REG-STATUS-TYPE-EVENT","DOCSIS-CPE-TYPE-ADHOC","DOCSIS-CPE-TYPE-EVENT","DOCSIS-CMTS-CM-US-STATS-TYPE","DOCSIS-SAMIS-TYPE-2"]
+        },
+        {
+            "port": 4737,
+            "addr": "ARRIS_CMTS_IP",
+            "passive_mode": false,
+            "vendor": "Arris",
+            "sessions": ["CPE","CM-REG","CM-US","SAMIS-1"]
         }
-
     ]
 }

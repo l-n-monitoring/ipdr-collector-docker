@@ -1,17 +1,22 @@
 {
     "CMTS-CM-US-STATS-TYPE": {
-        "outputs": ["kafka","json"],
-        "tags": ["CmtsHostName","CmtsMdIfName","CmtsMdIfIndex","CmMacAddr","CmRegStatusId","CmtsCmUsChIfName","CmtsCmUsChIfIndex"],
+        "tags": ["CmtsHostName","CmtsMdIfName","CmtsMdIfIndex","CmMacAddr","CmtsCmUsChIfName","CmtsCmUsChIfIndex"],
         "fields": ["CmtsSysUpTime","CmtsCmUsRxPower","CmtsCmUsSignalNoise","CmtsCmUsMicroreflections","CmtsCmUsUnerroreds","CmtsCmUsCorrecteds","CmtsCmUsUncorrectables","CmtsCmUsHighResolutionTimingOffset","CmtsCmUsIsMuted","CmtsCmUsRangingStatus"]
     },
     "CMTS-CM-REG-STATUS-TYPE": {
-        "outputs": ["kafka"],
         "tags": ["CmtsHostName","CmtsMdIfName","CmtsMdIfIndex","CmMacAddr","CmIpv4Addr"],
         "fields": ["CmtsSysUpTime","CmQosVersion","CmRegStatusValue","CmLastRegTime"]
     },
     "SAMIS-TYPE-2": {
-        "output": ["kafka"],
-        "tags": ["CmtsHostName","CmtsMdIfName","CmtsMdIfIndex","CmMacAddr","ServiceIdentifier","ServiceClassName","ServiceAppId","ServiceGateId","ServiceDirection"],
+        "tags": ["CmtsHostName","CmtsMdIfName","CmtsMdIfIndex","CmMacAddr","ServiceClassName","ServiceAppId","ServiceGateId","ServiceDirection"],
+        "fields": ["RecCreationTime","ServiceOctetsPassed","ServicePktsPassed","ServiceSlaDropPkts","ServiceSlaDelayPkts","ServiceTimeCreated","ServiceTimeActive"]
+    },
+    "SAMIS-TYPE": {
+        "tags": ["CmtsHostName","CmtsMdIfName","CmtsMdIfIndex","CmMacAddr","ServiceClassName","ServiceAppId","ServiceGateId","ServiceDirection"],
+        "fields": ["RecCreationTime","ServiceOctetsPassed","ServicePktsPassed","ServiceSlaDropPkts","ServiceSlaDelayPkts","ServiceTimeCreated","ServiceTimeActive"]
+    },
+    "DOCSIS-SAMIS-TYPE-1:SAMIS-TYPE": {
+        "tags": ["CmtsHostName","CmtsMdIfName","CmtsMdIfIndex","CmMacAddr","ServiceClassName","ServiceAppId","ServiceGateId","ServiceDirection"],
         "fields": ["RecCreationTime","ServiceOctetsPassed","ServicePktsPassed","ServiceSlaDropPkts","ServiceSlaDelayPkts","ServiceTimeCreated","ServiceTimeActive"]
     }
 }
