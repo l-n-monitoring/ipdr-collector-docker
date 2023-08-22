@@ -87,6 +87,7 @@ services:
       POSTGRES_USER: timescaledb
       POSTGRES_PASSWORD: password
     volumes:
+      - ./init-scripts:/docker-entrypoint-initdb.d
       - timescaledb_data:/var/lib/postgresql/data
 
   ipdr-collector-python:
