@@ -34,12 +34,11 @@ services:
     - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
     depends_on:
       - influxdb
+      - kafka
     links:
       - influxdb
     ports:
     - '8125:8125'
-    depends_on:
-      -kafka
 
   influxdb:
     image: influxdb:1.8-alpine
